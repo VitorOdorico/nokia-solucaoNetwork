@@ -301,7 +301,11 @@ function alterarNomeESenhaDaRede(){
     if (p1 == "" || p2 == "" || p3 =="" || nomeRede == '' || senhaRede == '') {
         window.alert(`é necessário adicionar Slot,Porta,Index, nome e senha para alterar`)
         return;
-    } else {
+    }else if(senhaRede.length < 8){
+        alert('A senha deve conter pelo menos 8 caracteres.');
+        return;
+    } 
+     else {
         navigator.clipboard.writeText(comandoAlterar)
             .then(() => {
                 alerta()
@@ -327,7 +331,10 @@ function alterarSenhaDaRede(){
     if (p1 == "" || p2 == "" || p3 =="" || senhaRede == '') {
         window.alert(`é necessário adicionar Slot,Porta,Index e senha para alterar`)
         return;
-    } else {
+    } else if(senhaRede.length < 8){
+        alert('A senha deve conter pelo menos 8 caracteres.');
+        return;
+    } else{
         navigator.clipboard.writeText(comandoAlterar)
             .then(() => {
                 alerta()
