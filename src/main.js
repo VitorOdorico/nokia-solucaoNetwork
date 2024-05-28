@@ -26,9 +26,9 @@ function capturaInputs() {
 
     inputSenhaSIP =  document.getElementById("inputSenhaSIP").value;
     inputUsuarioSIP =  document.getElementById("inputUsuarioSIP").value;
-    inputPortaTelefone =  document.getElementById("inputPortaTelefone").value;
-
     capPortTelefonica = document.getElementById("portaTelefonica").value;
+
+
 }
 
 function capturaValorVlan (){
@@ -457,18 +457,21 @@ function onuSolicitandoProvisionamento(){
 
 
 function provisionarTelefone(){
-    // isNumeric();
-    // if (![p1, p2, p3].every(isNumeric)) {
-    //     alert('Por favor, insira apenas números. nos campos slot, pon, posição');
-    //     return;
-    // }
+    capturaInputs()
+    isNumeric();
+    if (![p1, p2, p3].every(isNumeric)) {
+        alert('Por favor, insira apenas números. nos campos slot, pon, posição');
+        return;
+    }
     let portaTelefonica = capturaValorPortaTelefonica()
-    console.log(portaTelefonica)
+    console.log()
 
-   
-    // fazer validação das gcob
-    if(portaTelefonica.value == "1"){
-        let comandoAlterar  = `SET-QOS-USQUEUE::ONTL2UNIQ-1-1-${p1}-${p2}-${p3}-14-1-5::::USBWPROFNAME=HSI_1G_UP;ENT-VLANEGPORT::ONTL2UNI-1-1-${p1}-${p2}-${p3}-14-1:::0,300:PORTTRANSMODE=SINGLETAGGED;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-10::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.OutboundProxy,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-11::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.ProxyServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-12::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.RegistrarServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-13::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.UserAgentDomain,PARAMVALUE="sip.solucaonetwork.com";ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-14::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica.value}.Enable,PARAMVALUE=Enabled;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-15::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica.value}.DirectoryNumber,PARAMVALUE=${inputUsuarioSIP};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-16::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica.value}.SIP.AuthUserName,PARAMVALUE=${inputUsuarioSIP};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-17::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica.value}.SIP.AuthPassword,PARAMVALUE=${inputSenhaSIP};`
+   if(p1 == "" || p2 =="" || p3 ==""){
+    window.alert(`é necessário adicionar Slot,Porta,Index para reiniciar a ONU`)
+    return;
+   }
+   if(portaTelefonica == "1"){
+        let comandoAlterar  = `SET-QOS-USQUEUE::ONTL2UNIQ-1-1-${p1}-${p2}-${p3}-14-1-5::::USBWPROFNAME=HSI_1G_UP;ENT-VLANEGPORT::ONTL2UNI-1-1-${p1}-${p2}-${p3}-14-1:::0,300:PORTTRANSMODE=SINGLETAGGED;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-10::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.OutboundProxy,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-11::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.ProxyServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-12::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.RegistrarServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-13::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.UserAgentDomain,PARAMVALUE="sip.solucaonetwork.com";ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-14::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.Enable,PARAMVALUE=Enabled;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-15::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.DirectoryNumber,PARAMVALUE=${inputUsuarioSIP};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-16::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.SIP.AuthUserName,PARAMVALUE=${inputUsuarioSIP};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-17::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.SIP.AuthPassword,PARAMVALUE=${inputSenhaSIP};`
     navigator.clipboard.writeText(comandoAlterar)
             .then(() => {
                 alerta()
@@ -479,8 +482,9 @@ function provisionarTelefone(){
             });
 
         navigator.clipboard.writeText(comandoAlterar);
-    }else if(portaTelefonica.value == "2"){
-        let comandoAlterar  = `SET-QOS-USQUEUE::ONTL2UNIQ-1-1-${p1}-${p2}-${p3}-14-1-5::::USBWPROFNAME=HSI_1G_UP;ENT-VLANEGPORT::ONTL2UNI-1-1-${p1}-${p2}-${p3}-14-1:::0,300:PORTTRANSMODE=SINGLETAGGED;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-23::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.OutboundProxy,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-24::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.ProxyServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-25::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.RegistrarServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-26::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.UserAgentDomain,PARAMVALUE="sip.solucaonetwork.com";ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-27::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica.value}.Enable,PARAMVALUE=Enabled;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-28::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica.value}.DirectoryNumber,PARAMVALUE=${inputUsuarioSIP};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-29::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica.value}.SIP.AuthUserName,PARAMVALUE=${inputUsuarioSIP};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-30::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica.value}.SIP.AuthPassword,PARAMVALUE=${inputSenhaSIP};`
+        return;
+    }else if(portaTelefonica == 2){
+        let comandoAlterar  = `SET-QOS-USQUEUE::ONTL2UNIQ-1-1-${p1}-${p2}-${p3}-14-1-5::::USBWPROFNAME=HSI_1G_UP;ENT-VLANEGPORT::ONTL2UNI-1-1-${p1}-${p2}-${p3}-14-1:::0,300:PORTTRANSMODE=SINGLETAGGED;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-23::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.OutboundProxy,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-24::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.ProxyServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-25::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.RegistrarServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-26::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.UserAgentDomain,PARAMVALUE="sip.solucaonetwork.com";ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-27::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.Enable,PARAMVALUE=Enabled;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-28::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.DirectoryNumber,PARAMVALUE=${inputUsuarioSIP};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-29::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.SIP.AuthUserName,PARAMVALUE=${inputUsuarioSIP};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-30::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.SIP.AuthPassword,PARAMVALUE=${inputSenhaSIP};`
     
         navigator.clipboard.writeText(comandoAlterar)
             .then(() => {
@@ -492,7 +496,7 @@ function provisionarTelefone(){
             });
 
         navigator.clipboard.writeText(comandoAlterar);
-    
+        return;
     }else{
         window.alert("insira uma porta de telefone valida 1 ou 2, necessário inserir Slot e Porta e Posição ")
     }
