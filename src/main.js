@@ -381,6 +381,37 @@ function alterarSenhaDaRede(){
 }
 
 
+function alterarNomeDaRede(){
+    capturaInputs()
+    isNumeric();
+
+    if (![p1, p2, p3].every(isNumeric)) {
+        alert('Por favor, insira apenas números. nos campos slot, pon, posição');
+        return;
+    }
+    let comandoAlterar = `DLT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-4;DLT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-6;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-4::::PARAMNAME=InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID,PARAMVALUE="${nomeRede}";ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${p1}-${p2}-${p3}-6::::PARAMNAME=InternetGatewayDevice.LANDevice.1.WLANConfiguration.5.SSID,PARAMVALUE="${nomeRede}_5G";`
+    if (p1 == "" || p2 == "" || p3 =="") {
+        window.alert(`é necessário adicionar Slot,Porta,Index e senha para alterar`)
+        return;
+    } else if(nomeRede == ''){
+        window.alert('é necessario adicionar o novo nome da rede')
+    }
+    else{
+        navigator.clipboard.writeText(comandoAlterar)
+            .then(() => {
+                alerta()
+                console.log('Texto copiado para a área de transferência:', comandoAlterar);
+            })
+            .catch(err => {
+                console.error('Erro ao copiar texto: ', err);
+            });
+
+        navigator.clipboard.writeText(comandoAlterar);
+    };
+}
+
+
+
 function alterarSenhaOnu(){
     capturaInputs();
     isNumeric();

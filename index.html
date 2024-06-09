@@ -50,9 +50,7 @@
                 <option value="2700">VLAN de PARANAVAÍ - PR</option>
             </select> 
             <button type="button" onclick="ProvONU()">Copiar</button>
-            <p class="titulo">ALTERAR SENHA DE ACESSO WEB</p>
-            <input type="text" id="inputAlterarAlclONU" placeholder="Adicione a senha web(ALCL) ">
-            <button type="button" onclick="alterarSenhaOnu()">Alterar senha web</button>
+            <p style="color: red; font-weight: bold;">Em breve provisionar apenas telefone</p>
         </form>
         
     </div>
@@ -63,11 +61,12 @@
             <input type="text" id="inputAlterarNomeWifi" placeholder="Nome da rede Wi-Fi">
             <input type="text" id="inputAlterarNomeSenha" placeholder="Senha da rede Wi-Fi">
         </form>
-        <button type="button" onclick="alterarNomeESenhaDaRede()">Alterar NOME e SENHA</button>
+        <button type="button" onclick="alterarNomeDaRede()">Alterar somente NOME</button>
         <button type="button" onclick="alterarSenhaDaRede()">Alterar somente SENHA</button>
+        <button type="button" onclick="alterarNomeESenhaDaRede()">Alterar NOME e SENHA</button>
+        
     <BR>
         <p class="titulo">CONFIGURAR TELEFONE</p>
-        <p style="color: red;">em fase de testes</p>
         <form id="codeForm3">
             <!-- <input type="text" id="inputPortaTelefone" placeholder="Porta do telefone"> -->
             <select name="selecionaPortaTelefonica" id="portaTelefonica" >
@@ -79,6 +78,11 @@
             <input type="text" id="inputUsuarioSIP" placeholder="Usuário SIP">
             <input type="text" id="inputSenhaSIP" placeholder="Senha SIP">
             <button type="button" onclick="provisionarTelefone()">Configurar telefone</button>
+
+
+            <p class="titulo">ALTERAR SENHA DE ACESSO WEB</p>
+            <input type="text" id="inputAlterarAlclONU" placeholder="Adicione a senha web(ALCL) ">
+            <button type="button" onclick="alterarSenhaOnu()">Alterar senha web</button>
         </form>
         
     </div>
