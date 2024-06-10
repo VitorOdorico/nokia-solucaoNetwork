@@ -15,9 +15,9 @@
     <div class="container">
         <p class="titulo">POSIÇÃO DO CLIENTE</p>    
         <form id="">
-            <input type="text" id="p1" placeholder="Slot GPON">
-            <input type="text" id="p2" placeholder="Porta PON">
-            <input type="text" id="p3" placeholder="Posição da ONT">
+            <input type="text" id="inputSlot" placeholder="Slot GPON">
+            <input type="text" id="inputGpon" placeholder="Porta PON">
+            <input type="text" id="inputIndex" placeholder="Posição da ONT">
     
         <p class="titulo">PESQUISAR CLIENTE</p>
     
@@ -51,6 +51,18 @@
             </select> 
             <button type="button" onclick="ProvONU()">Copiar</button>
             <p style="color: red; font-weight: bold;">Em breve provisionar apenas telefone</p>
+
+            <input type="text" id="ProvNOME" placeholder="Nome do cliente">
+            <input type="text" id="ProvALCL" placeholder="Novo ALCL">
+            <input type="text" id="ProvCAIXA" placeholder="Caixa e Porta">
+            <select name="selecionaPortaTelefonica" id="portaTelefonica">
+                <option value="1">PORTA 1</option>
+                <option value="2">PORTA 2</option>
+            </select>
+            
+            <input type="text" id="inputUsuarioSIP" placeholder="Usuário SIP">
+            <input type="text" id="inputSenhaSIP" placeholder="Senha SIP">
+            <button type="button" onclick="provisionarTelefone()">Configurar telefone</button>
         </form>
         
     </div>
