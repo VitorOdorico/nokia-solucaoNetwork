@@ -135,8 +135,6 @@ function provOnuTelefone(){
 
     let portaTelefonica =  capturaValorPortaTelefonicaProv();
     if(portaTelefonica == 1){
-
-
         let comandoAlterar  = `ENT-ONT::ONT-1-1-${inputSlot}-${inputGpon}-${inputIndex}::::DESC1="${inputProvTelNome}",DESC2="${inputProvTelCaixa}",SERNUM=${inputProvTelAlcl},SWVERPLND=AUTO,OPTICSHIST=ENABLE,PLNDCFGFILE1=AUTO,DLCFGFILE1=AUTO,VOIPALLOWED=VEIP;
 ED-ONT::ONT-1-1-${inputSlot}-${inputGpon}-${inputIndex}:::::IS;ENT-ONTCARD::ONTCARD-1-1-${inputSlot}-${inputGpon}-${inputIndex}-14:::VEIP,1,0::IS;ENT-LOGPORT::ONTL2UNI-1-1-${inputSlot}-${inputGpon}-${inputIndex}-14-1:::;ED-ONTVEIP::ONTVEIP-1-1-${inputSlot}-${inputGpon}-${inputIndex}-14-1:::::IS;SET-QOS-USQUEUE::ONTL2UNIQ-1-1-${inputSlot}-${inputGpon}-${inputIndex}-14-1-0::::USBWPROFNAME=HSI_1G_UP;SET-VLANPORT::ONTL2UNI-1-1-${inputSlot}-${inputGpon}-${inputIndex}-14-1:::MAXNUCMACADR=4,CMITMAXNUMMACADDR=1;SET-QOS-USQUEUE::ONTL2UNIQ-1-1-${inputSlot}-${inputGpon}-${inputIndex}-14-1-5::::USBWPROFNAME=HSI_1G_UP;ENT-VLANEGPORT::ONTL2UNI-1-1-${inputSlot}-${inputGpon}-${inputIndex}-14-1:::0,300:PORTTRANSMODE=SINGLETAGGED;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${inputSlot}-${inputGpon}-${inputIndex}-10::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.OutboundProxy,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${inputSlot}-${inputGpon}-${inputIndex}-11::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.ProxyServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${inputSlot}-${inputGpon}-${inputIndex}-12::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.RegistrarServer,PARAMVALUE=10.255.0.1;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${inputSlot}-${inputGpon}-${inputIndex}-13::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.SIP.UserAgentDomain,PARAMVALUE="sip.solucaonetwork.com";ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${inputSlot}-${inputGpon}-${inputIndex}-14::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.Enable,PARAMVALUE=Enabled;ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${inputSlot}-${inputGpon}-${inputIndex}-15::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.DirectoryNumber,PARAMVALUE=${inputProvTelUsuarioSip};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${inputSlot}-${inputGpon}-${inputIndex}-16::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.SIP.AuthUserName,PARAMVALUE=${inputProvTelUsuarioSip};ENT-HGUTR069-SPARAM::HGUTR069SPARAM-1-1-${inputSlot}-${inputGpon}-${inputIndex}-17::::PARAMNAME=InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.${portaTelefonica}.SIP.AuthPassword,PARAMVALUE=${inputProvTelNomeSenhaSip};`
     navigator.clipboard.writeText(comandoAlterar)
@@ -318,6 +316,33 @@ function verificarFibra(){
     };
 
 }
+
+function verificarInterface(){
+    capturaInputs();
+    isNumeric();
+    const comandOptics = ` show equipment ont interface 1/1/${inputSlot}/${inputGpon}/${inputIndex} detail`
+    if (![inputSlot, inputGpon,inputIndex].every(isNumeric)) {
+        alert('Por favor, insira apenas números. nos campos slot, pon, posição');
+        return;
+    }
+    if (inputSlot == "" || inputGpon == "" || inputIndex =="") {
+        window.alert(`é necessário adicionar Slot e Pon e posição para pesquisar a interface`)
+        return;
+    } else {
+        navigator.clipboard.writeText(comandOptics)
+            .then(() => {
+                alerta()
+                console.log('Texto copiado para a área de transferência:', comandOptics);
+            })
+            .catch(err => {
+                console.error('Erro ao copiar texto: ', err);
+            });
+
+        navigator.clipboard.writeText(comandOptics);
+    };
+
+}
+
 const buttonPESQUISAPON = () => {
     capturaInputs();
     isNumeric();
