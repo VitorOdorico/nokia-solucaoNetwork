@@ -37,6 +37,10 @@ function capturaInputs() {
     inputProvTelUsuarioSip = document.getElementById("inputProvTelUsuarioSIP").value;
     inputProvTelNomeSenhaSip = document.getElementById("inputProvTelSenhaSIP").value;
 
+
+    // bridge
+    inputBridgeNome = document.getElementById("inputBridgeNome").value;
+    inputBridgeAlcl = document.getElementById("inputBridgeAlcl").value;
     
 }
 
@@ -330,15 +334,15 @@ function verificarInterface(){
         return;
     } else {
         navigator.clipboard.writeText(comandOptics)
-            .then(() => {
-                alerta()
-                console.log('Texto copiado para a área de transferência:', comandOptics);
-            })
-            .catch(err => {
-                console.error('Erro ao copiar texto: ', err);
-            });
+        .then(() => {
+            alerta()
+            console.log('Texto copiado para a área de transferência:', comandOptics);
+        })
+        .catch(err => {
+            console.error('Erro ao copiar texto: ', err);
+        });
 
-        navigator.clipboard.writeText(comandOptics);
+    navigator.clipboard.writeText(comandOptics);
     };
 
 }
@@ -665,7 +669,7 @@ function testBridge(){
     let port;
     let comando = `
 
-        configure equipment ont interface 1/1/${inputSlot}/${inputGpon}/${inputIndex}sw-ver-pland auto desc1 SITELBRA_SISTEMA_DE_TELECOMUNICAES_DO_BRASIL_LTDA desc2 sitelbrasltda43 sernum ALCL:B3FA5C55 subslocid WILDCARD fec-up disable optics-hist enable sw-dnload-version disabled voip-allowed veip log-auth-pwd plain:** pland-cfgfile1 auto dnload-cfgfile1 auto planned-us-rate nominal-line-rate
+        configure equipment ont interface 1/1/${inputSlot}/${inputGpon}/${inputIndex}sw-ver-pland auto desc1 ${inputBridgeNome} desc2 ${inputBridgeAlcl} sernum ALCL:B3FA5C55 subslocid WILDCARD fec-up disable optics-hist enable sw-dnload-version disabled voip-allowed veip log-auth-pwd plain:** pland-cfgfile1 auto dnload-cfgfile1 auto planned-us-rate nominal-line-rate
 
         configure equipment ont interface 1/1/${inputSlot}/${inputGpon}/${inputIndex} admin-state up
 
@@ -677,7 +681,5 @@ function testBridge(){
         configure bridge port 1/1/${inputSlot}/${inputGpon}/${inputIndex}/1/${port} max-unicast-mac 12 max-committed-mac 1		
         configure bridge port 1/1/${inputSlot}/${inputGpon}/${inputIndex}/1/${port} vlan-id 2821
         configure bridge port 1/1/${inputSlot}/${inputGpon}/${inputIndex}/1/${port} pvid 2821
-
-            
-            `
+        `
 }
