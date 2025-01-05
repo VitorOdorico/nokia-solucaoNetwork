@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de ONU</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <link rel="stylesheet" href="./statics/styles/sidebar.css">
+</head>
+<body>
+    <!-- Barra Lateral -->
+    <nav class="sidebar">
+        <img src="https://empresas.solucaonetwork.com.br/wp-content/webp-express/webp-images/uploads/2024/07/solucao-12-768x268.png.webp" width="200px" alt="">
+        <ul>
+            <li><a onclick="showSection('posicao-cliente')"><i class="fas fa-map-marker-alt"></i> Localizar Cliente</a></li>
+            <li><a onclick="showSection('provisionar-cliente')"><i class="fas fa-user-plus"></i> Provisionar Cliente</a></li>
+            <li><a onclick="showSection('configurar-wifi')"><i class="fas fa-wifi"></i> Configurar Wi-Fi</a></li>
+            <li><a onclick="showSection('configurar-telefone')"><i class="fas fa-phone"></i> Configurar Telefone</a></li>
+            <li><a onclick="showSection('alterar-vlan')"><i class="fas fa-exchange-alt"></i> Alterar VLAN e PPPoE</a></li>
+            <li><a onclick="showSection('realizar-bridge')"><i class="fas fa-network-wired"></i> Realizar Bridge</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="content">
+        <!-- Seção Posição do Cliente -->
+        <div id="posicao-cliente" class="container">
+            <p class="titulo">POSIÇÃO DO CLIENTE</p>
+            <form>
+                <input type="text" id="inputSlot" placeholder="Slot GPON">
+                <input type="text" id="inputGpon" placeholder="Porta PON">
+                <input type="text" id="inputIndex" placeholder="Posição da ONT">
+                <input type="text" id="pesquisarALCL" placeholder="Inserir ALCL">
+                <input type="text" id="pesquisarNOME" placeholder="Inserir nome">
+                <button type="button" onclick="buttonPESQUISA()">Pesquisar cliente</button>
+                <button type="button" onclick="buttonPESQUISAPON()">Pesquisa da PON inteira</button>    
+                <button type="button" onclick="buttonALARM()">Pesquisa dos alarmes</button>    
+                <button type="button" onclick="reiniciarONU()">Reiniciar ONU</button>    
+                <button type="button" onclick="onuSolicitandoProvisionamento()">ONU p/ provisionar</button>    
+                <button type="button" onclick="verificarFibra()">Verificar fibra</button>    
+                <button type="button" onclick="desprovisionarONU()" id="desprovisionar">Desprovisionar ONU</button> 
+            </form>
+        </div>
+
+        <!-- Seção Provisionar Cliente -->
+        <div id="provisionar-cliente" class="container">
+            <p class="titulo">PROVISIONAR CLIENTE</p>
+            <form>
+                <input type="text" id="ProvNOME" placeholder="Nome do cliente">
+                <input type="text" id="ProvALCL" placeholder="Novo ALCL">
+                <input type="text" id="ProvCAIXA" placeholder="Caixa e Porta">
+                <input type="text" id="ProvPPPOE" placeholder="Usuário PPPOE">
+                <input type="text" id="ProvPASS" placeholder="Senha PPPOE">
+                <select name="VLAN" id="ProvVLAN">
+                    <option value="2800">VLAN de NOVA ANDRADINA - MS</option>
+                    <option value="2710">VLAN de MANDAGUAÇU - PR</option>
+                    <option value="2820">VLAN de NOVA ESPERANÇA - PR</option>
+                    <option value="2714">VLAN de TERRA RICA - PR</option>
+                    <option value="2821">VLAN de PAIÇANDU - PR</option>
+                    <option value="2700">VLAN de PARANAVAÍ - PR</option>
+                </select> 
+                <button type="button" onclick="ProvONU()">Provisionar</button>
+                
+            </form>
+        </div>
+
+        <!-- Seção Configurar Wi-Fi -->
+        <div id="configurar-wifi" class="container">
+            <p class="titulo">CONFIGURAR WI-FI</p>
+            <form>
+                <input type="text" id="inputSSID" placeholder="SSID">
+                <input type="password" id="inputSenhaWifi" placeholder="Senha Wi-Fi">
+                <button type="button">Configurar Wi-Fi</button>
+            </form>
+        </div>
+
+        <!-- Seção Configurar Telefone -->
+        <div id="configurar-telefone" class="container">
+            <p class="titulo">CONFIGURAR TELEFONE</p>
+            <form>
+                <input type="text" id="inputNumeroTelefone" placeholder="Número do Telefone">
+                <button type="button">Configurar Telefone</button>
+            </form>
+        </div>
+
+        <!-- Seção Alterar VLAN e PPPoE -->
+        <div id="alterar-vlan" class="container">
+            <p class="titulo">ALTERAR VLAN E PPPoE</p>
+            <form>
+                <input type="text" id="inputVLAN" placeholder="Nova VLAN">
+                <input type="text" id="inputPPPoE" placeholder="Usuário PPPoE">
+                <button type="button">Alterar Configurações</button>
+            </form>
+        </div>
+
+        <!-- Seção Realizar Bridge -->
+        <div id="realizar-bridge" class="container">
+            <p class="titulo">REALIZAR BRIDGE</p>
+            <form>
+                <input type="text" id="inputBridgePort" placeholder="Porta da Bridge">
+                <button type="button">Realizar Bridge</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Oculta todas as seções
+            const sections = document.querySelectorAll('.container');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Mostra a seção clicada
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
